@@ -5,22 +5,23 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Spryker\Glue\ContentProductAbstractListsRestApi\Plugin;
+namespace Spryker\Glue\ContentProductAbstractListsRestApi\Plugin\GlueApplication;
 
-use Generated\Shared\Transfer\AbstractProductsRestAttributesTransfer;
+use Generated\Shared\Transfer\ContentProductAbstractListsAttributesTransfer;
 use Spryker\Glue\ContentProductAbstractListsRestApi\ContentProductAbstractListsRestApiConfig;
 use Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRouteCollectionInterface;
 use Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRoutePluginInterface;
-use Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceWithParentPluginInterface;
 use Spryker\Glue\Kernel\AbstractPlugin;
 
 /**
- * @deprecated Use {@link \Spryker\Glue\ContentProductAbstractListsRestApi\Plugin\GlueApplication\AbstractProductsResourceRoutePlugin} instead.
+ * @method \Spryker\Glue\ContentProductAbstractListsRestApi\ContentProductAbstractListsRestApiConfig getConfig()
+ * @method \Spryker\Glue\ContentProductAbstractListsRestApi\ContentProductAbstractListsRestApiFactory getFactory()
  */
-class ContentProductAbstractListRoutePlugin extends AbstractPlugin implements ResourceRoutePluginInterface, ResourceWithParentPluginInterface
+class ContentProductAbstractListsResourceRoutePlugin extends AbstractPlugin implements ResourceRoutePluginInterface
 {
     /**
      * {@inheritDoc}
+     * - Configures available actions for `content-product-abstract-lists` resource.
      *
      * @api
      *
@@ -30,10 +31,7 @@ class ContentProductAbstractListRoutePlugin extends AbstractPlugin implements Re
      */
     public function configure(ResourceRouteCollectionInterface $resourceRouteCollection): ResourceRouteCollectionInterface
     {
-        $resourceRouteCollection->addGet(
-            ContentProductAbstractListsRestApiConfig::ACTION_RESOURCE_CONTENT_PRODUCT_ABSTRACT_LISTS_GET,
-            false
-        );
+        $resourceRouteCollection->addGet('get', false);
 
         return $resourceRouteCollection;
     }
@@ -47,7 +45,7 @@ class ContentProductAbstractListRoutePlugin extends AbstractPlugin implements Re
      */
     public function getResourceType(): string
     {
-        return ContentProductAbstractListsRestApiConfig::RESOURCE_CONTENT_PRODUCT_ABSTRACT_LISTS_PRODUCTS;
+        return ContentProductAbstractListsRestApiConfig::RESOURCE_CONTENT_PRODUCT_ABSTRACT_LISTS;
     }
 
     /**
@@ -59,7 +57,7 @@ class ContentProductAbstractListRoutePlugin extends AbstractPlugin implements Re
      */
     public function getController(): string
     {
-        return ContentProductAbstractListsRestApiConfig::CONTROLLER_CONTENT_PRODUCT_ABSTRACT_LIST;
+        return 'content-product-abstract-lists-resource';
     }
 
     /**
@@ -71,18 +69,6 @@ class ContentProductAbstractListRoutePlugin extends AbstractPlugin implements Re
      */
     public function getResourceAttributesClassName(): string
     {
-        return AbstractProductsRestAttributesTransfer::class;
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @api
-     *
-     * @return string
-     */
-    public function getParentResourceType(): string
-    {
-        return ContentProductAbstractListsRestApiConfig::RESOURCE_CONTENT_PRODUCT_ABSTRACT_LISTS;
+        return ContentProductAbstractListsAttributesTransfer::class;
     }
 }

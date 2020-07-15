@@ -5,17 +5,17 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Spryker\Glue\ContentProductAbstractListsRestApi\Processor;
+namespace Spryker\Glue\ContentProductAbstractListsRestApi\Processor\AbstractProduct\Expander;
 
-use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;
 use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 
-interface ContentProductAbstractListReaderInterface
+interface ProductAbstractByContentProductAbstractListExpanderInterface
 {
     /**
+     * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface[] $resources
      * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
      *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
+     * @return void
      */
-    public function getContentProductAbstractListById(RestRequestInterface $restRequest): RestResponseInterface;
+    public function addResourceRelationships(array $resources, RestRequestInterface $restRequest): void;
 }

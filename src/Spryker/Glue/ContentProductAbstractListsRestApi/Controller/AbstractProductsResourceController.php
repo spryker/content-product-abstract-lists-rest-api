@@ -12,17 +12,15 @@ use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 use Spryker\Glue\Kernel\Controller\AbstractController;
 
 /**
- * @deprecated Use {@link \Spryker\Glue\ContentProductAbstractListsRestApi\Controller\AbstractProductsResourceController} instead.
- *
  * @method \Spryker\Glue\ContentProductAbstractListsRestApi\ContentProductAbstractListsRestApiFactory getFactory()
  */
-class ContentProductAbstractListController extends AbstractController
+class AbstractProductsResourceController extends AbstractController
 {
     /**
      * @Glue({
-     *     "getResourceById": {
+     *     "getCollection": {
      *          "summary": [
-     *              "Retrieves content item abstract list products."
+     *              "Retrieves product abstract list by the content abstract product list content item."
      *          ],
      *          "parameters": [{
      *              "ref": "acceptLanguage"
