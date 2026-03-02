@@ -12,19 +12,10 @@ use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;
 
 interface ContentProductAbstractListRestResponseBuilderInterface
 {
-    /**
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function createContentItemIdNotSpecifiedErrorResponse(): RestResponseInterface;
 
-    /**
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function createContentItemtNotFoundErrorResponse(): RestResponseInterface;
 
-    /**
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function createContentTypeInvalidErrorResponse(): RestResponseInterface;
 
     /**
@@ -41,10 +32,5 @@ interface ContentProductAbstractListRestResponseBuilderInterface
      */
     public function createContentProductAbstractListsRestResources(array $contentProductAbstractListTypeTransfers): array;
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface $contentProductAbstractListRestResource
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function createContentProductAbstractListRestResponse(RestResourceInterface $contentProductAbstractListRestResource): RestResponseInterface;
 }

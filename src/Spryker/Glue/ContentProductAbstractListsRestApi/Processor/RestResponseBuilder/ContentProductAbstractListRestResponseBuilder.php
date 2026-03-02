@@ -27,10 +27,6 @@ class ContentProductAbstractListRestResponseBuilder implements ContentProductAbs
      */
     protected $productsRestApiResource;
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface $restResourceBuilder
-     * @param \Spryker\Glue\ContentProductAbstractListsRestApi\Dependency\RestApiResource\ContentProductAbstractListsRestApiToProductsRestApiResourceInterface $productsRestApiResource
-     */
     public function __construct(
         RestResourceBuilderInterface $restResourceBuilder,
         ContentProductAbstractListsRestApiToProductsRestApiResourceInterface $productsRestApiResource
@@ -39,9 +35,6 @@ class ContentProductAbstractListRestResponseBuilder implements ContentProductAbs
         $this->productsRestApiResource = $productsRestApiResource;
     }
 
-    /**
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function createContentItemIdNotSpecifiedErrorResponse(): RestResponseInterface
     {
         return $this->restResourceBuilder
@@ -54,9 +47,6 @@ class ContentProductAbstractListRestResponseBuilder implements ContentProductAbs
             );
     }
 
-    /**
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function createContentItemtNotFoundErrorResponse(): RestResponseInterface
     {
         return $this->restResourceBuilder
@@ -69,9 +59,6 @@ class ContentProductAbstractListRestResponseBuilder implements ContentProductAbs
             );
     }
 
-    /**
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function createContentTypeInvalidErrorResponse(): RestResponseInterface
     {
         return $this->restResourceBuilder
@@ -120,11 +107,6 @@ class ContentProductAbstractListRestResponseBuilder implements ContentProductAbs
         return $contentProductAbstractListsRestResources;
     }
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface $contentProductAbstractListRestResource
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function createContentProductAbstractListRestResponse(RestResourceInterface $contentProductAbstractListRestResource): RestResponseInterface
     {
         $restResponse = $this->restResourceBuilder->createRestResponse();

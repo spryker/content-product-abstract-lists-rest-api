@@ -20,10 +20,5 @@ interface ContentProductAbstractListReaderInterface
      */
     public function getContentProductAbstractListsResources(array $contentProductAbstractListKeys, string $localeName): array;
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function getContentProductAbstractListsById(RestRequestInterface $restRequest): RestResponseInterface;
 }

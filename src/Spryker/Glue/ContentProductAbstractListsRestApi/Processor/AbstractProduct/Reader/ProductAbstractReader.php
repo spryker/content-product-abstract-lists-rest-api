@@ -38,12 +38,6 @@ class ProductAbstractReader implements ProductAbstractReaderInterface
      */
     protected $productsRestApiResource;
 
-    /**
-     * @param \Spryker\Glue\ContentProductAbstractListsRestApi\Dependency\Client\ContentProductAbstractListsRestApiToContentProductClientInterface $contentProductClient
-     * @param \Spryker\Glue\ContentProductAbstractListsRestApi\Processor\RestResponseBuilder\ContentProductAbstractListRestResponseBuilderInterface $contentProductAbstractListRestResponseBuilder
-     * @param \Spryker\Glue\ContentProductAbstractListsRestApi\Dependency\Client\ContentProductAbstractListsRestApiToStoreClientInterface $storeClient
-     * @param \Spryker\Glue\ContentProductAbstractListsRestApi\Dependency\RestApiResource\ContentProductAbstractListsRestApiToProductsRestApiResourceInterface $productsRestApiResource
-     */
     public function __construct(
         ContentProductAbstractListsRestApiToContentProductClientInterface $contentProductClient,
         ContentProductAbstractListRestResponseBuilderInterface $contentProductAbstractListRestResponseBuilder,
@@ -56,11 +50,6 @@ class ProductAbstractReader implements ProductAbstractReaderInterface
         $this->productsRestApiResource = $productsRestApiResource;
     }
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function getProductAbstractByContentProductAbstractListId(RestRequestInterface $restRequest): RestResponseInterface
     {
         $parentResource = $restRequest->findParentResourceByType(

@@ -18,9 +18,6 @@ class ProductAbstractByContentProductAbstractListExpander implements ProductAbst
      */
     protected $productAbstractReader;
 
-    /**
-     * @param \Spryker\Glue\ContentProductAbstractListsRestApi\Processor\AbstractProduct\Reader\ProductAbstractReaderInterface $productAbstractReader
-     */
     public function __construct(ProductAbstractReaderInterface $productAbstractReader)
     {
         $this->productAbstractReader = $productAbstractReader;

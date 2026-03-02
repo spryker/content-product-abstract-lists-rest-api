@@ -22,9 +22,6 @@ use Spryker\Glue\Kernel\AbstractFactory;
 
 class ContentProductAbstractListsRestApiFactory extends AbstractFactory
 {
-    /**
-     * @return \Spryker\Glue\ContentProductAbstractListsRestApi\Processor\Reader\ContentProductAbstractListReaderInterface
-     */
     public function createContentProductAbstractListReader(): ContentProductAbstractListReaderInterface
     {
         return new ContentProductAbstractListReader(
@@ -33,9 +30,6 @@ class ContentProductAbstractListsRestApiFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\ContentProductAbstractListsRestApi\Processor\AbstractProduct\Reader\ProductAbstractReaderInterface
-     */
     public function createProductAbstractReader(): ProductAbstractReaderInterface
     {
         return new ProductAbstractReader(
@@ -46,9 +40,6 @@ class ContentProductAbstractListsRestApiFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\ContentProductAbstractListsRestApi\Processor\RestResponseBuilder\ContentProductAbstractListRestResponseBuilderInterface
-     */
     public function createContentProductAbstractListRestResponseBuilder(): ContentProductAbstractListRestResponseBuilderInterface
     {
         return new ContentProductAbstractListRestResponseBuilder(
@@ -57,9 +48,6 @@ class ContentProductAbstractListsRestApiFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\ContentProductAbstractListsRestApi\Processor\AbstractProduct\Expander\ProductAbstractByContentProductAbstractListExpanderInterface
-     */
     public function createProductAbstractByContentProductAbstractListExpander(): ProductAbstractByContentProductAbstractListExpanderInterface
     {
         return new ProductAbstractByContentProductAbstractListExpander(
@@ -67,25 +55,16 @@ class ContentProductAbstractListsRestApiFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\ContentProductAbstractListsRestApi\Dependency\Client\ContentProductAbstractListsRestApiToContentProductClientInterface
-     */
     public function getContentProductClient(): ContentProductAbstractListsRestApiToContentProductClientInterface
     {
         return $this->getProvidedDependency(ContentProductAbstractListsRestApiDependencyProvider::CLIENT_CONTENT_PRODUCT);
     }
 
-    /**
-     * @return \Spryker\Glue\ContentProductAbstractListsRestApi\Dependency\RestApiResource\ContentProductAbstractListsRestApiToProductsRestApiResourceInterface
-     */
     public function getProductRestApiResource(): ContentProductAbstractListsRestApiToProductsRestApiResourceInterface
     {
         return $this->getProvidedDependency(ContentProductAbstractListsRestApiDependencyProvider::RESOURCE_PRODUCTS_REST_API);
     }
 
-    /**
-     * @return \Spryker\Glue\ContentProductAbstractListsRestApi\Dependency\Client\ContentProductAbstractListsRestApiToStoreClientInterface
-     */
     public function getStoreClient(): ContentProductAbstractListsRestApiToStoreClientInterface
     {
         return $this->getProvidedDependency(ContentProductAbstractListsRestApiDependencyProvider::CLIENT_STORE);

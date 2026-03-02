@@ -24,10 +24,6 @@ class ContentProductAbstractListReader implements ContentProductAbstractListRead
      */
     protected $contentProductAbstractListRestResponseBuilder;
 
-    /**
-     * @param \Spryker\Glue\ContentProductAbstractListsRestApi\Dependency\Client\ContentProductAbstractListsRestApiToContentProductClientInterface $contentProductClient
-     * @param \Spryker\Glue\ContentProductAbstractListsRestApi\Processor\RestResponseBuilder\ContentProductAbstractListRestResponseBuilderInterface $contentProductAbstractListRestResponseBuilder
-     */
     public function __construct(
         ContentProductAbstractListsRestApiToContentProductClientInterface $contentProductClient,
         ContentProductAbstractListRestResponseBuilderInterface $contentProductAbstractListRestResponseBuilder
@@ -57,11 +53,6 @@ class ContentProductAbstractListReader implements ContentProductAbstractListRead
             ->createContentProductAbstractListsRestResources($contentProductAbstractListTypeTransfers);
     }
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function getContentProductAbstractListsById(RestRequestInterface $restRequest): RestResponseInterface
     {
         if (!$restRequest->getResource()->getId()) {
