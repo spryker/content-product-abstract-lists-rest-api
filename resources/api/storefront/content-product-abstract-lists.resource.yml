@@ -1,0 +1,42 @@
+resource:
+    name: ContentProductAbstractLists
+    shortName: content-product-abstract-lists
+    description: 'Product abstract lists from content items'
+
+    provider: Spryker\Glue\ContentProductAbstractListsRestApi\Api\Storefront\Provider\ContentProductAbstractListsStorefrontProvider
+
+    paginationEnabled: false
+
+    operations:
+        - type: Get
+          description: 'Retrieve a content product abstract list by content key'
+          uriTemplate: '/content-product-abstract-lists/{id}'
+
+        - type: GetCollection
+          description: 'Content product abstract list collection (always returns error - content key required)'
+          uriTemplate: '/content-product-abstract-lists'
+
+    includes:
+        - relationshipName: abstract-products
+          targetResource: AbstractProducts
+          resolverClass: Spryker\Glue\ContentProductAbstractListsRestApi\Api\Storefront\Relationship\ContentProductAbstractListAbstractProductsRelationshipResolver
+
+    properties:
+        id:
+            type: string
+            identifier: true
+            writable: false
+            readable: true
+            required: false
+            description: 'Content key identifier'
+            openapiContext:
+                example: 'apl-1'
+
+        idProductAbstracts:
+            type: array
+            writable: false
+            readable: true
+            required: false
+            description: 'List of abstract product IDs in this content list'
+            openapiContext:
+                example: [1, 42, 137]

@@ -22,4 +22,8 @@
     <transfer name="ContentProductAbstractListsAttributes">
     </transfer>
 
+    <transfer name="Locale">
+        <property name="localeName" type="string"/>
+    </transfer>
+
 </transfers>
