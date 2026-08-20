@@ -11,10 +11,24 @@ resource:
         - type: Get
           description: 'Retrieve a content product abstract list by content key'
           uriTemplate: '/content-product-abstract-lists/{id}'
+          openapiContext:
+              summary: 'Retrieve a content product abstract list'
+              description: 'Returns the abstract product ids the content item identified by its content key carries, for the current locale.'
+              responses:
+                  200:
+                      description: 'Content product abstract list returned.'
+                  404:
+                      description: 'Content not found.'
 
         - type: GetCollection
           description: 'Content product abstract list collection (always returns error - content key required)'
           uriTemplate: '/content-product-abstract-lists'
+          openapiContext:
+              summary: 'List content product abstract lists (always 400)'
+              description: 'Content product abstract lists are addressed by content key; the bare collection URL always returns 400 "Content key is missing".'
+              responses:
+                  400:
+                      description: 'Content key is missing.'
 
     includes:
         - relationshipName: abstract-products
