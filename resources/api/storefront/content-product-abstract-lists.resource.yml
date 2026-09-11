@@ -23,6 +23,7 @@ resource:
         - type: GetCollection
           description: 'Content product abstract list collection (always returns error - content key required)'
           uriTemplate: '/content-product-abstract-lists'
+          openapi: false
           openapiContext:
               summary: 'List content product abstract lists (always 400)'
               description: 'Content product abstract lists are addressed by content key; the bare collection URL always returns 400 "Content key is missing".'
