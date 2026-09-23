@@ -11,6 +11,9 @@ resource:
         - type: Get
           description: 'Retrieve a content product abstract list by content key'
           uriTemplate: '/content-product-abstract-lists/{id}'
+          extraProperties:
+              notFoundCode: '2201'
+              notFoundMessage: 'Content item not found.'
           openapiContext:
               summary: 'Retrieve a content product abstract list'
               description: 'Returns the abstract product ids the content item identified by its content key carries, for the current locale.'
