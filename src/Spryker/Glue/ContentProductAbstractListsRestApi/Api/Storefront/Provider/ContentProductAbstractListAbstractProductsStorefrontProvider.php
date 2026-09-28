@@ -13,8 +13,10 @@ use Generated\Api\Storefront\AbstractProductsStorefrontResource;
 use Spryker\ApiPlatform\Exception\GlueApiException;
 use Spryker\ApiPlatform\State\Provider\AbstractStorefrontProvider;
 use Spryker\Client\ContentProduct\ContentProductClientInterface;
-use Spryker\Client\ProductStorage\ProductStorageClientInterface;
 use Spryker\Glue\ContentProductAbstractListsRestApi\ContentProductAbstractListsRestApiConfig;
+use Spryker\Glue\ProductsRestApi\Api\Storefront\Mapper\AbstractProductsResourceMapperInterface;
+use Spryker\Glue\ProductsRestApi\Api\Storefront\Reader\AbstractProductsAttributesReaderInterface;
+use Spryker\Service\Serializer\SerializerServiceInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 class ContentProductAbstractListAbstractProductsStorefrontProvider extends AbstractStorefrontProvider
@@ -23,7 +25,9 @@ class ContentProductAbstractListAbstractProductsStorefrontProvider extends Abstr
 
     public function __construct(
         protected ContentProductClientInterface $contentProductClient,
-        protected ProductStorageClientInterface $productStorageClient,
+        protected AbstractProductsAttributesReaderInterface $abstractProductsAttributesReader,
+        protected AbstractProductsResourceMapperInterface $abstractProductsResourceMapper,
+        protected SerializerServiceInterface $serializer,
     ) {
     }
 
@@ -50,22 +54,43 @@ class ContentProductAbstractListAbstractProductsStorefrontProvider extends Abstr
             );
         }
 
-        $productAbstractIds = $contentProductAbstractListTypeTransfer->getIdProductAbstracts();
+        $productAbstractIds = array_map('intval', $contentProductAbstractListTypeTransfer->getIdProductAbstracts());
 
         if ($productAbstractIds === []) {
             return [];
         }
 
+        return $this->buildResourcesByAbstractProductIds($productAbstractIds, $localeName);
+    }
+
+    /**
+     * The list answers the same abstract-product elements the resource is read as everywhere else, so
+     * it goes through the reader and mapper that resource owns rather than mapping storage data of
+     * its own - which is what left the meta fields, the attribute map and the super attributes null.
+     *
+     * @param array<int> $productAbstractIds
+     *
+     * @return array<\Generated\Api\Storefront\AbstractProductsStorefrontResource>
+     */
+    protected function buildResourcesByAbstractProductIds(array $productAbstractIds, string $localeName): array
+    {
+        $transfers = $this->abstractProductsAttributesReader->findBulkAbstractProductAttributesByIds(
+            $productAbstractIds,
+            $localeName,
+            $this->getStore()->getNameOrFail(),
+        );
+
         $resources = [];
 
         foreach ($productAbstractIds as $idProductAbstract) {
-            $productData = $this->productStorageClient->findProductAbstractStorageData((int)$idProductAbstract, $localeName);
-
-            if ($productData === null) {
+            if (!isset($transfers[$idProductAbstract])) {
                 continue;
             }
 
-            $resources[] = $this->mapToResource($productData);
+            $resources[] = $this->serializer->denormalize(
+                $this->abstractProductsResourceMapper->mapAbstractProductsAttributesTransferToResourceData($transfers[$idProductAbstract]),
+                AbstractProductsStorefrontResource::class,
+            );
         }
 
         return $resources;
@@ -93,19 +118,5 @@ class ContentProductAbstractListAbstractProductsStorefrontProvider extends Abstr
             ContentProductAbstractListsRestApiConfig::RESPONSE_CODE_CONTENT_KEY_IS_MISSING,
             ContentProductAbstractListsRestApiConfig::RESPONSE_DETAILS_CONTENT_KEY_IS_MISSING,
         );
-    }
-
-    /**
-     * @param array<string, mixed> $productData
-     */
-    protected function mapToResource(array $productData): AbstractProductsStorefrontResource
-    {
-        $resource = new AbstractProductsStorefrontResource();
-        $resource->sku = isset($productData['sku']) ? (string)$productData['sku'] : null;
-        $resource->name = isset($productData['name']) ? (string)$productData['name'] : null;
-        $resource->description = isset($productData['description']) ? (string)$productData['description'] : null;
-        $resource->attributes = $productData['attributes'] ?? null;
-
-        return $resource;
     }
 }
